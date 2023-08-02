@@ -103,6 +103,8 @@ def use_item(item_name):
                 health_value += v
             text += f"Add {v} {i}.\n"
         more_information_label.config(text=text)
+        update_bag_labels()
+        UpdateData(0)
         
     else:
         update_bag_labels()
