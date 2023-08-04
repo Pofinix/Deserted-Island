@@ -142,6 +142,25 @@ def BagButton():
     y = (window_y - HEIGHT) // 2
     root.geometry(f"{WIDTH}x{HEIGHT}+{x}+{y - 100}")
 
+def ProbabilityCalculation(probability_dict):
+    # 首先检查概率字典是否为空
+    if not probability_dict:
+        raise ValueError("概率字典不能为空")
+
+    # 检查概率总和是否为1
+    total_probability = sum(probability_dict.values())
+    if abs(total_probability - 1.0) > 1e-6:
+        raise ValueError("概率总和必须等于1")
+
+    # 生成一个0到1之间的随机概率
+    random_prob = random.uniform(0, 1)
+
+    # 依次累加概率，找到第一个超过随机概率的数值
+    cumulative_prob = 0
+    for number, prob in probability_dict.items():
+        cumulative_prob += prob
+        if random_prob <= cumulative_prob:
+            return number
 
 #------------------------------------------------------------------------------#
 
